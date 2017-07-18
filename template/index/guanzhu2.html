@@ -1,0 +1,52 @@
+{include file="index/zoneheader.html"}
+<style>
+    div.content li{
+        padding:25px 100px 30px 20px;
+    }
+    div.content li a {
+        display: block;
+        width:70%;
+    }
+    div.content li a >div{
+        width:50px;height:50px;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+    div.content li a >div img{
+        width:100%;
+    }
+    div.display{
+        width:200px;
+        height:80px;
+        background: #ccc;
+        color: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 80px;
+        font-size: 20px;
+        display: none;
+        position: fixed;
+        top:200px;
+        left:500px;
+        z-index: 5;
+    }
+</style>
+<div class="content">
+    <ul>
+        {foreach $cang as $val}
+        {foreach $member1 as $v}
+        {if $val['uid1']==$v['mid']}
+        <li class="{$val['gid']}">
+            <a href="index.php?f=zone&a=init&mid={$v['mid']}">
+               <h4>{$v['mname']}</h4>
+            </a>
+        </li>
+        {/if}
+        {/foreach}
+        {/foreach}
+    </ul>
+</div>
+<div class="display"></div>
+
+</body>
+</html>

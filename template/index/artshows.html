@@ -1,0 +1,263 @@
+{include file="index/header.html"}
+<link rel="stylesheet" href="{CSS_PATH}artshow.css">
+<style>
+    div.content{
+        width:1000px;
+        margin:0 auto;
+        background: lightcyan;
+        padding:50px;
+    }
+    div.content  li:first-child{
+        border-top: 1px solid #d2d2d2;
+    }
+    div.content  li {
+        border-bottom: 1px solid #d2d2d2;
+        padding-bottom: 20px;
+        height:auto;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    div.content{
+        text-align: center;
+    }
+    div.content span{
+        margin-right:15px;
+    }
+    div.content > div.con{
+        line-height: 2em;
+    }
+    div.content > section > img{
+        width:120px;
+        padding: 20px;
+    }
+    ul.mess div.photo{
+        width:50px;
+        height:50px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    ul.mess p:first-of-type{
+        width:75%;
+
+    }
+    ul.mess p{
+        text-align: left;
+        line-height: 50px;
+    }
+    h3{
+        margin:20px;
+        text-align: left;
+    }
+    .otherinfo{
+        width:1000px;
+        margin:20px auto;
+    }
+</style>
+<div class="content">
+    <h2 class="stitle" mid="{$show['ltitle']}">{$show['ltitle']}</h2>
+    <span>所属分类：{$category['cname']}</span>
+    <span>点击量：{$show['hit']}</span>
+    <span>时间：{$show['ltime']}</span>
+    {if $show['limg']}
+    <section>
+        <img src="{$show['limg']}" alt="">
+    </section>
+    {/if}
+    <div class="con">{$show['lcon']}</div>
+    {if $mess}
+    <h3>留言</h3>
+    <ul class="mess">
+       {foreach $mess as $v}
+       {foreach $messuser as $val}
+        {if $v['uid1'] eq $val['mid']}
+            <li>
+                {if $val['mimg']}
+                <div class="photo"><img src="{$val['mimg']}" alt=""></div>
+                {/if}
+                <p>{$v['mcon']}</p>
+                <p>{$v['mtime']}</p>
+            </li>
+        {/if}
+        {/foreach}
+        {/foreach}
+    </ul>
+    {/if}
+</div>
+<div class="notice notice_true">
+    <div class="navbox">
+        操作成功
+    </div>
+</div>
+<div class="notice notice_false">
+    <div class="navbox">
+        操作失败
+    </div>
+</div>
+<div class="notice notice_other">
+    <div class="navbox">
+        操作失败
+    </div>
+</div>
+
+
+{*<!--信息存储区-->*}
+<input type="hidden" name="sid" class="sid" value="{$show['lid']}">
+{*<!--uid1  当前登录的人id -->*}
+<input type="hidden" name="uid1" value="{$uid}">
+{*<!--uid2  作者 -->*}
+<input type="hidden" name="uid2" value="{$uid2}">
+
+
+<div class="otherinfo">
+    <div class="buttons">
+        {if $guanzhu==noguanzhu}
+        <input type="button" class="btn btn-default select love_author" id="love_author" value="关注作者">
+        {elseif $guanzhu==guanzhu}
+        <input type="button" class="btn btn-default select" id="love_author" value="取消关注">
+        {/if}
+
+        {if $love==nolove}
+        <input type="button" class="btn btn-default select" id="love_article" value="收藏本文">
+        {elseif $love==love}
+        <input type="button" class="btn btn-default select" id="love_article" value="取消收藏">
+        {/if}
+
+        <input type="button" class="btn btn-default" id="btn_message" value="留言">
+
+        <div id="message_area">
+            <form action="index.php?m=index&f=artshows&a=addmessage" id="form_message">
+                <textarea class="form-control" rows="3" name="text_message" id="text_message"></textarea>
+                <label for="btn_submessage"></label>
+                <button type="button" class="btn btn-default" id="btn_submessage">
+                    确认提交
+                </button>
+                <button type="button" class="btn btn-default" id="btn_unmessage">
+                    取消留言
+                </button>
+            </form>
+            <div class="tishi">
+                您只能输入300个字
+            </div>
+        </div>
+
+    </div>
+    <!--留言板-->
+    <ul class="liuyanbox">
+
+        <li style="display:none">
+            <div class="touxiang">
+                <div class="imgbox">
+                    <img class="touxiang_img" src="" alt="">
+                </div>
+                <p class="uname">
+
+                </p>
+            </div>
+            <div class="liuyan_contentbox">
+                <div class="liuyan_content">
+
+                </div>
+                <div class="gongneng">
+                    <div class="replyer">
+                        <!--第<span>{}</span>条回复-->
+                    </div>
+                    <input type="button" class="btn btn-default btn-sm" value="回复本层" reply_id="" >
+                </div>
+            </div>
+        </li>
+
+        {$i=0}
+        <!--i用来数楼层-->
+        {if $replys=="noreplys"}
+        <li class="noreplys">
+            没有回复
+        </li>
+        {else}
+        {foreach $replys as $k=>$v}
+        <li>
+            <div class="touxiang">
+                <div class="imgbox">
+                    <img src="{$v['mimg']}" alt="">
+                </div>
+                <p class="uname">
+                    {$v["mname"]}
+                </p>
+            </div>
+            <div class="liuyan_contentbox">
+                <div class="liuyan_content">
+                    {$v["mcon"]}
+                </div>
+                <div class="gongneng">
+                    <div class="replyer">
+                        #{$i++}&nbsp;&nbsp;{$v["mtime"]}
+                        <!--第<span>{}</span>条回复-->
+                    </div>
+                    <input type="button" class="btn btn-default btn-sm" value="回复本层" reply_id="{$v['mid']}" >
+                </div>
+            </div>
+            <!--子集留言 start-->
+            {$j=0}
+            {foreach $replys[$k]["son"] as $v1}
+            <div class="reply_son">
+                <div class="touxiang">
+                    <div class="imgbox">
+                        <img src="{$v1['mimg']}" alt="">
+                    </div>
+                    <p class="uname">
+                        {$v1["mname"]}
+                    </p>
+                </div>
+                <div class="liuyan_contentbox">
+                    <div class="liuyan_content">
+                        {$v1["mcon"]}
+                    </div>
+                    <div class="gongneng">
+                        <div class="replyer">
+                            #{$j++}&nbsp;&nbsp;{$v1["mtime"]}
+                            <!--第<span>{}</span>条回复-->
+                        </div>
+                        <input type="button" class="btn btn-default btn-sm" value="回复本层" reply_id="{$v1['mid']}">
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+            <!--子集留言 end-->
+        </li>
+        {/foreach}
+        {/if}
+
+    </ul>
+    <!--回复中的回复模版-->
+    <div class="reply_son" style="display:none" id="reply_son_moban">
+        <div class="touxiang">
+            <div class="imgbox">
+                <img class="touxiang_img"  src="" alt="">
+            </div>
+            <p class="uname">
+
+            </p>
+        </div>
+        <div class="liuyan_contentbox">
+            <div class="liuyan_content">
+
+            </div>
+            <div class="gongneng">
+                <div class="replyer">
+                    <!--第<span>{}</span>条回复-->
+                </div>
+                <input type="button" class="btn btn-default btn-sm" value="回复本层" reply_id="">
+            </div>
+        </div>
+    </div>
+
+    <!--回复页码-->
+    {$pages}
+    <script src="{JS_PATH}artshow.js"></script>
+</div>
+</body>
+</html>

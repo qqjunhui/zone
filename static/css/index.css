@@ -1,0 +1,80 @@
+header{
+    width:100%;
+    height:41px;
+    background: #000;
+}
+nav{
+    width:1200px;
+    height:100%;
+    margin:0 auto;
+    line-height: 41px;
+    display: flex;
+    justify-content: space-between;
+}
+nav > div.left{
+    height:100%;
+}
+nav > div.left > a{
+    color:#fff;
+    float: left;
+    font-weight: bold;
+    font-size:16px;
+    margin:0 40px;
+}
+nav > div.left .search{
+    float: right;
+    margin-left:80px;
+    margin-top: 5px;
+    border:1px solid #3e3e3e;
+    border-radius: 20px;
+    background: #c2ccd1;
+}
+nav > div.right > button{
+    float: right;
+    margin:5px 5px;
+}
+/*登录注册页面*/
+div.login,div.reg{
+    width:240px;
+    position: fixed;
+    left:50%;
+    top:150px;
+    margin-left:-150px;
+    text-align: center;
+    box-shadow: 0 0 5px #333;
+    background: #fff;
+    border-radius:15px;
+    display: none;
+    padding:20px;
+    z-index: 10022;
+}
+div.login > form > div,div.reg > form > div{
+    margin:10px 0;
+}
+div.login > .loginclose,div.reg > .regclose{
+    position: absolute;
+    top:10px;
+    right:10px;
+    border-radius: 50%;
+    width:15px;
+    height:15px;
+    font-size: 14px;
+    text-align: center;
+    line-height: 15px;
+    border:1px solid #333333;
+    cursor:pointer;
+}
+
+div.wang{
+    text-align: left;
+    padding-left: 15px;
+}
+div.wang > a{
+    color:#00a2d4;
+}
+input.yzm{
+    width:100px;
+}
+input.yzm+img{
+    width:100px;
+}

@@ -1,0 +1,116 @@
+{include file="index/header.html"}
+
+
+
+
+
+
+<style>
+    form > div{
+        margin:20px 0;
+    }
+    label{
+        margin-right: 20px;
+    }
+    .error{
+        display: inline-block;
+        color:red;
+    }
+    span{
+        display: inline-block;
+        padding-top: 5px;
+    }
+    input[type='radio']{
+        margin:0;
+    }
+    script{
+        width:500px;height:300px;margin-left: 50px;
+    }
+</style>
+<script type="text/javascript" charset="utf-8" src="{EDIT_PATH}/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{EDIT_PATH}/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="{EDIT_PATH}/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="{JS_PATH}/upload.js"></script>
+
+<form class="form-horizontal mima" method="post" action="index.php?m=index&f=info&a=addCon">
+    <div class="form-group">
+        <label class="col-sm-2 control-label">选择类型</label>
+        <select class="form-control" name="cid">
+            {$str}
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">选择可见范围</label>
+        <span>所有人可见</span> <input type="radio" name="leixin"  value="1" checked>
+        <span >仅自己可见</span> <input type="radio" name="leixin"  value="0" >
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">标题</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="ltitle">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">关键词</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputPassword3"  name="keywords">
+        </div>
+    </div>
+
+    <div class="form-group" style="margin-left:120px;">
+        <p>内容：</p>
+        <script id="editor" type="text/plain" name="lcon"></script>
+    </div>
+
+    <div class="form-group uploadbox" style="margin-left:100px;">
+        <label>上传图片</label>
+        <input type="hidden" name="limage">
+    </div>
+    <input class="btn btn-default" type="submit" value="发表" style="margin:20px 100px;">
+</form>
+</body>
+</html>
+<script>
+    var ue = UE.getEditor('editor');
+    $('script').css('width','1000px')
+
+    var obj = new upload();
+    obj.size = 1024 * 1024 * 8.6;
+    obj.selectBtnStyle.background = "red";
+    obj.createView({
+        parent: document.querySelector(".uploadbox")
+    });
+    obj.up("index.php?m=index&f=info&a=upload",function(data){
+        document.querySelector("input[name=limage]").value=data;
+        console.log(data)
+    });
+
+    $('form').validate({
+        rules: {
+            ltitle:{
+                required: true,
+                rangelength: [1, 255],
+            },
+            keywords:{
+                required: true,
+            },
+            lcon: {
+                required: true,
+            },
+        },
+        messages: {
+            ltitle:{
+                required: '*',
+                rangelength: $.validator.format('标题长度在{0}到{1}之前'),
+            },
+            keywords:{
+                required: "*",
+            },
+            lcon: {
+                required: "*",
+            },
+        },
+    })
+</script>

@@ -1,0 +1,183 @@
+/*文章标题 start*/
+.titlebox{
+    padding-top:10px;
+    padding-bottom:10px;
+    width:1000px;
+    margin: 0 auto;
+    border-bottom:1px solid #555;
+    margin-bottom:20px;
+}
+.titlebox h2{
+    line-height:40px;
+    margin-bottom:15px;
+    text-align:center;
+    font-size:20px;
+}
+.titlebox .info{
+    height:30px;
+    line-height:30px;
+    text-align:center;
+}
+.titlebox .info span{
+    margin-right:10px;
+    font-size:12px;
+}
+/*文章标题 end*/
+/*文章主体 start*/
+.content{
+    width:1000px;
+    margin:0 auto;
+    padding-bottom:40px;
+    border-bottom:1px solid #555;
+}
+/*文章主体 end*/
+
+/*其他功能 start*/
+.otherinfo{
+    width:1000px;
+    margin:0 auto;
+    padding-bottom:50px;
+    padding-top:10px;
+}
+    /* 按扭 s*/
+    .otherinfo .buttons{
+        padding-bottom:10px;
+    }
+    .love_author:hover,
+    .love_article:hover,
+    #btn_message:hover,
+    #btn_submessage:hover,
+    .select
+    {
+        color:#fff;
+        background:#00a800;
+        border:1px solid #00a800;
+    }
+    #btn_unmessage:hover{
+        color:#fff;
+        background:#dd2727;
+        border:1px solid #dd2727;
+    }
+    #message_area{
+        margin-top:10px;
+        display:none;
+        position:relative;
+     }
+    #text_message{
+        margin-bottom:10px;
+    }
+    #message_area .tishi{
+        width:200px;
+        height:40px;
+        text-align:center;
+        background:#fff;
+        position:absolute;
+        left:50%;
+        top:50%;
+        margin-top:-20px;
+        margin-left:-100px;
+        box-shadow: 2px 2px 5px rgba(150,150,150,0.16);
+        display:none;
+    }
+    /* 按扭 e*/
+
+    /*用户留言 start*/
+    .liuyanbox li{
+        padding:10px;
+        padding-bottom:5px;
+        border-bottom:1px solid #555;
+        margin-bottom:5px;
+    }
+    .liuyanbox li.noreplys{
+        height:100px;
+        width:100%;
+        line-height:100px;
+        font-size:30px;
+        text-align:Center;
+    }
+    .liuyanbox li .touxiang{
+        width:150px;
+        text-align:center;
+        float:left;
+    }
+    .liuyanbox li .touxiang .imgbox{
+        height:80px;
+        width:80px;
+        display:inline-block;
+        border-radius: 50%;
+        overflow:hidden;
+    }
+    .liuyanbox li .touxiang .imgbox img{
+        width:100%;
+    }
+    .liuyanbox li .touxiang .uname{
+        line-height:40px;
+        text-align:center;
+        height:40px;
+        width:100%;
+    }
+    .liuyanbox li .liuyan_contentbox{
+        padding-left:150px;
+        min-height:120px;
+    }
+    .liuyanbox li .liuyan_content{
+        min-height:80px;
+    }
+    .liuyanbox li .gongneng{
+        padding-top:5px;
+        border-top:1px solid #ddd;
+    }
+    .liuyanbox li .gongneng .replyer{
+        display:inline-block;
+        margin-right:10px;
+    }
+
+        /*子集留言*/
+    .liuyanbox li .reply_son{
+        padding-left:150px;
+        padding-right:40px;
+    }
+    .liuyanbox li .reply_son .liuyan_contentbox{
+        padding-left:130px;
+        border:1px solid #ddd;
+    }
+    .liuyanbox li .reply_son .touxiang{
+        height:100px;
+        width:120px;
+    }
+    .liuyanbox li .reply_son .touxiang .imgbox{
+        height:60px;
+        width:60px;
+        margin-bottom:15px;
+    }
+    /*用户留言 end*/
+
+
+/*其他功能 end*/
+
+/* 操作提示信息 start */
+.notice{
+    position:fixed;
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    background:rgba(0,0,0,0.4);
+    display:none;
+}
+.notice .navbox{
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-100px;
+    margin-top:-50px;
+    background:#000;
+    color:#fff;
+    opacity: 0.9;
+    height:40px;
+    line-height:40px;
+    width:200px;
+    text-align:center;
+    border-radius:4px;
+}
+/* 操作提示信息 end */

@@ -1,0 +1,87 @@
+﻿body,html{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    background-image:url("../img/aa.jpg") ;
+    background-size: cover;
+}
+div#wrapper{
+    width:100%;
+    height:100%;
+    /*overflow: hidden;*/
+    /*background:orange;*/
+}
+header{
+    position: relative;
+    width:100%;
+    height:80px;
+    padding-top: 20px;
+    text-align: center;
+    border-bottom: 1px solid #00CA79;
+}
+nav{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width:auto;
+    height:40px;
+
+}
+#wrapper > div{
+    width:17%;
+    height:560px;
+    /**/
+    box-sizing: border-box;
+    float: left;
+}
+#wrapper > div > ul{
+    width:100%;
+    height: 100%;
+    border-right:1px solid #00CA79;
+}
+
+#wrapper > div > ul > li{
+    height:auto;
+    width:100%;
+    text-align: left;
+    padding-left: 60px;
+    box-sizing: border-box;
+}
+#wrapper > div > ul > li > a{
+    font-size: 14px;
+}
+#wrapper > div > ul > li a{
+    display: block;
+    height:35px;
+    /*width:100%;*/
+    line-height: 35px;
+
+}
+#wrapper > div > ul > li > a + ul{
+    display: none;
+}
+#wrapper > div > ul > li li{
+    height:35px;
+    width:100%;
+    padding-left: 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#wrapper > div > ul > li:first-child{
+    height:30px;
+    line-height: 30px;
+    padding:0;
+}
+#wrapper > div > ul > li:first-child >div.inner-text{
+    font-size: 16px;
+
+    border-bottom: 1px solid #00CA79;
+}
+
+iframe{
+    float: right;
+    width:82.5%;
+    height:550px;
+    border:none;
+}

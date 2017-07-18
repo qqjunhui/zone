@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{CSS_PATH}bootstrap.min.css">
+</head>
+<style>
+    .table.table-bordered th,.table.table-bordered td{
+        text-align: center;
+    }
+</style>
+<body>
+<table class="table table-bordered" >
+    <tr style="text-align: center">
+        <th>用户id</th>
+        <th>文章标题</th>
+        <th>缩略图</th>
+        <th>关键词</th>
+        <th>文章类型</th>
+        <th>状态</th>
+        <th>时间</th>
+        <th>操作</th>
+    </tr>
+    {foreach $arr as $v}
+    <tr style="text-align: center">
+        <td>{$v["mid"]}</td>
+        <td>{$v["ltitle"]}</td>
+        <td>
+            <img src="{$v['limg']}" style="width: 40px;" alt="">
+        </td>
+        <td>{$v['keywords']}</td>
+        {foreach $cate as $val}
+        {if $val['cid'] == $v['cid']}
+        <td>{$val['cname']}</td>
+        {/if}
+        {/foreach}
+
+        <td>{$v['srec']}</td>
+        <td>{$v['ltime']}</td>
+        <td><a href="index.php?m=admin&f=lists&a=listshow&sid={$v['lid']}"><button type="button" class="btn btn-success">点击查看</button></a>
+            {if $v['srec'] == 0}<a href="index.php?m=admin&f=lists&a=srec&sid={$v['lid']}"><button type="button" class="btn btn-success">通过</button></a>{/if}
+            {if $v['srec'] == 1}<a href="index.php?m=admin&f=lists&a=state&sid={$v['lid']}"><button type="button" class="btn btn-warning ">拉黑</button></a>{/if}</td>
+    </tr>
+    {/foreach}
+</table>
+<a href="index.php?m=admin&f=lists&a=show&status=srec=0">
+    未审核
+</a>
+<a href="index.php?m=admin&f=lists&a=show&status=srec=1">
+    审核通过
+</a>
+{$pages}
+</body>
+</html>

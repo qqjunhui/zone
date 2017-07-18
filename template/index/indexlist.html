@@ -1,0 +1,125 @@
+{include file="index/header.html"}
+
+<style>
+    div.content{
+    width:1000px;
+    margin:0 auto;
+    background:#86caff;
+    padding:50px;
+        display: flex;
+    }
+    div.content ul{
+        width:60%;
+    }
+    div.content  li:first-of-type{
+        border-top: 1px solid #d2d2d2;
+    }
+    div.content  li {
+        border-bottom: 1px solid #d2d2d2;
+        padding-bottom: 20px;
+        padding:0 30px;
+    }
+    div.content  li p:first-of-type{
+        font-size: 12px;
+        color:#8c8c8c;
+    }
+    div.content  li p:nth-of-type(2){
+        padding:20px;
+    }
+    div.content  li img{
+        width:100px;
+    }
+    div.content  li div.photo{
+        width:50px;
+        height:50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-top:20px;
+        display: inline-block;
+    }
+    div.content  li div.photo+span{
+        margin-left:10px;
+        line-height: 2em;
+    }
+    .nav{
+        width:1100px;
+        margin:0 auto;
+        padding: 20px 0;
+        background: #f9e2b3;;
+    }
+    nav.nav .header{
+         float: right;
+         margin-right: 150px;
+         width:400px;
+         display: flex;
+         justify-content: space-around;
+         font-size: 20px;
+     }
+
+</style>
+<nav class="nav">
+    <div class="header">
+        <a href="index.php">推荐</a>
+        {foreach $list as $v}
+        <a href="index.php?m=index&f=index&a=lists&cid={$v['cid']}">{$v['cname']}</a>
+        {/foreach}
+    </div>
+</nav>
+<div class="content">
+    <ul>
+        {foreach $content as $v}
+        {foreach $member as $val}
+        {if $v['mid'] eq $val['mid']}
+        {foreach $member1 as $value}
+        {if $v['mid'] eq $value['mid']}
+        <li>
+            <a href="">
+                <div class="photo">
+                    <img src="{$val['mimg']}" alt="">
+                </div>
+                <span>{$value['mname']}</span>
+            </a>
+            <a href="index.php?f=artshows&a=show&lid={$v['lid']}"><h3>{$v['ltitle']}</h3></a>
+            <p>{$v['ltime']}</p>
+        </li>
+        {/if}
+        {/foreach}
+        {/if}
+        {/foreach}
+        {/foreach}
+    </ul>
+    <div class="right">
+        <div class="hot">
+            <h3>热门点击</h3>
+            {foreach $hitslist as $v}
+            <a href="index.php?f=artshows&a=show&lid={$v['lid']}" >
+                <p>
+                {$v["ltitle"]}
+                </p>
+            </a>
+            {/foreach}
+        </div>
+
+    </div>
+</div>
+<style>
+    .content > .right{
+        width:40%;
+        height:240px;
+        background: orange;
+        margin-left: 20px;
+    }
+    .content > .right div{
+        height:200px;
+        padding: 10px;
+    }
+    .content > .right div p{
+        padding:10px 20px;
+    }
+    .content > .right div p,.content > .right div h3{
+        border-bottom: 1px dotted #ccc;
+
+    }
+</style>
+</body>
+</html>

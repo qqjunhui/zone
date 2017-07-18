@@ -1,0 +1,77 @@
+{include file="index/zoneheader.html"}
+<style>
+    div.content li{
+        padding:25px 100px 30px 20px;
+    }
+    div.content li a {
+        display: block;
+        width:70%;
+    }
+    div.content li button{
+        display: none;
+        position: absolute;right:20px;
+    }
+    div.display{
+        width:200px;
+        height:80px;
+        background: #ccc;
+        color: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+        line-height: 80px;
+        font-size: 20px;
+        display: none;
+        position: fixed;
+        top:200px;
+        left:500px;
+        z-index: 5;
+    }
+</style>
+<div class="content">
+    <ul>
+        {foreach $cang as $val}
+        {foreach $artlist as $v}
+        {if $val['sid']==$v['lid']}
+        <li class="{$v['lid']}">
+            <a href="index.php?m=index&f=artshow&a=init&lid={$v['lid']}&mid={$mid}"><h4>{$v['ltitle']}</h4></a>
+            <p>
+                {if $v['srec'] == 0}
+                未审核
+                {else}
+                已审核
+                {/if}
+            </p>
+            <h6>{$v['ltime']}</h6>
+            <button type="button" class="btn btn-info">删除</button>
+        </li>
+        {/if}
+        {/foreach}
+        {/foreach}
+    </ul>
+</div>
+<div class="display"></div>
+<script>
+    $("div.content ul").bind('mouseover',function (e) {
+        if(e.target && e.target.nodeName == "LI"){
+            e.stopPropagation();
+            $(e.target).children("button").toggle();
+        }
+    })
+    $("div.content ul button").click(function () {
+        let id=$(this).parent().attr("class");
+        $.ajax({
+            url: "index.php?m=index&f=zone&a=cangdel",
+            type:"post",
+            data:{ id:id },
+            success:function(e){
+                $(".display").html(e).css("display","block");
+                setTimeout(function () {
+                    $(".display").css("display","none");
+                    $("div.content > ul > li."+id).remove();
+                },1500)
+            }
+        })
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+{include file="index/zoneheader.html"}
+<style>
+    div.content{
+        text-align: center;
+    }
+    div.content span{
+        margin-right:15px;
+    }
+    div.content > div.con{
+        line-height: 2em;
+    }
+    div.content > section > img{
+        width:120px;
+        padding: 20px;
+    }
+    ul.mess div.photo{
+        width:50px;
+        height:50px;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    ul.mess p:first-of-type{
+        width:75%;
+
+    }
+    ul.mess p{
+        text-align: left;
+        line-height: 50px;
+    }
+    h3{
+        margin:20px;
+        text-align: left;
+    }
+</style>
+<div class="content">
+    <h2>{$show['ltitle']}</h2>
+    <span>所属分类：{$category['cname']}</span>
+    <span>点击量：{$show['hit']}</span>
+    <span>时间：{$show['ltime']}</span>
+    {if $show['limg']}
+    <section>
+        <img src="{$show['limg']}" alt="">
+    </section>
+    {/if}
+    <div class="con">{$show['lcon']}</div>
+    {if $mess}
+    <h3>留言</h3>
+    <ul class="mess">
+       {foreach $mess as $v}
+       {foreach $messuser as $val}
+        {if $v['uid1'] eq $val['mid']}
+            <li>
+                {if $val['mimg']}
+                <div class="photo"><img src="{$val['mimg']}" alt=""></div>
+                {/if}
+                <p>{$v['mcon']}</p>
+                <p>{$v['mtime']}</p>
+            </li>
+        {/if}
+        {/foreach}
+        {/foreach}
+    </ul>
+    {/if}
+</div>
